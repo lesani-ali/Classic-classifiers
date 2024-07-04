@@ -1,17 +1,25 @@
-# MNIST Classification with MED and MMD
+# MNIST Classification with MED, MMD, KNN, ML, and MAP
 
-This repository contains implementations of two classifiers, Minimum Euclidean Distance (MED) and Maximum Mahalanobis Distance (MMD), applied to a subset of the MNIST dataset. The dataset has been reduced to include only two classes (digits 3 and 4) and dimensionality reduction to 2 dimensions has been performed using PCA.
+This repository contains implementations of several classifiers, including Minimum Euclidean Distance (MED), Maximum Mahalanobis Distance (MMD), k-Nearest Neighbors (KNN), Maximum Likelihood (ML), and Maximum A Posteriori (MAP). These classifiers are applied to a subset of the MNIST dataset. The dataset has been reduced to include only two classes (digits 3 and 4), and dimensionality reduction to 2 dimensions has been performed using PCA. Additionally, a regression version of KNN is implemented and applied to the dataset stored in the "regression_data" folder.
 
 
 ## Files
-- `main.ipynb`: Main script to load data, preprocess, train, and evaluate classifiers.
 - `MED.py`: Contains the `MED` class implementing the Minimum Euclidean Distance classifier.
 - `MMD.py`: Contains the `MMD` class implementing the Maximum Mahalanobis Distance classifier.
+- `KNN.py`: Contains the `KNN` class implementing the k-Nearest Neighbors classifier. This also includes the regression version of KNN.
+- `ML.py`: Contains the `ML` class implementing the Maximum Likelihood classifier.
+- `MAP.py`: Contains the `MAP` class implementing the Maximum A Posteriori classifier.
+- `main.ipynb`: Main notebook to load data, preprocess, train, and evaluate classifiers.
+- `knn_regression.ipynb`: A notebook to load data, preprocess, train, and evaluate KNN regression model.
+
+
+## Folders
+- "regression_data": Contains dataset for regression.
+
 
 ## Cloning Repository from GitHub
 Use this command to clone the repository from GitHub: <br>
-`git clone $REPOSITORY`<br> 
-- *(make sure to replace the `$REPOSITORY` with the address of repository)*
+`git clone git@github.com:lesani-ali/Classic-classifiers.git`<br> 
 
 
 ## Environment Setup

@@ -2,8 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-# Class for Minimum Mahalanobis Distance (MMD) classifier
-class MMD():
+class MMD:
 
     # Constructor
     def __init__(self):
@@ -13,22 +12,20 @@ class MMD():
         self.means = None
         self.inv_covariances = None
 
-
     def fit(self, X_train, y_train):
         """
         Fit the MMD classifier to the training data.
-        
+
         :param X_train: array-like, shape (n_samples, n_features), training data
         :param y_train: array-like, shape (n_samples,), target values
         """
         self.means = self._compute_means(X_train, y_train)
         self.inv_covariances = self._compute_inv_covariances(X_train, y_train)
 
-
     def predict(self, X_test):
         """
         Predict the class labels for the test data.
-        
+
         :param X_test: array-like, shape (n_samples, n_features), test data
         :return: array, shape (n_samples,), predicted class labels
         """
@@ -42,12 +39,11 @@ class MMD():
                 distances[label] = np.dot(np.dot(diff.T, inv_covariance), diff)
             predictions.append(min(distances, key=distances.get))
         return np.array(predictions)
-    
 
     def _compute_means(self, X, y):
         """
         Compute the means for each class.
-        
+
         :param X: array-like, shape (n_samples, n_features), input data
         :param y: array-like, shape (n_samples,), target values
         :return: dict, class labels as keys and means as values
@@ -59,8 +55,8 @@ class MMD():
 
     def _compute_inv_covariances(self, X, y):
         """
-        Compute the covariance matrices for each class.
-        
+        Compute the inverse of covariance matrices for each class.
+
         :param X: array-like, shape (n_samples, n_features), input data
         :param y: array-like, shape (n_samples,), target values
         :return: dict, class labels as keys and covariance matrices as values
@@ -70,7 +66,6 @@ class MMD():
             covariance = np.cov(X[y == label], rowvar=False)
             inv_covariances[label] = np.linalg.inv(covariance)
         return inv_covariances
-
 
     def get_decision_boundary_parameters(self):
         """
@@ -98,9 +93,11 @@ class MMD():
         :param X: array-like, shape (n_samples, n_features), input data
         :param y: array-like, shape (n_samples,), target values
         """
-                
+
+        # Decision boundary parameters
         A, B, C = self.get_decision_boundary_parameters()
 
+        # Creating mesh for plot
         x1 = np.linspace(np.min(X_train[:, 0]), np.max(X_train[:, 0]), 100)
         x2 = np.linspace(np.min(X_train[:, 1]), np.max(X_train[:, 1]), 100)
         X1, X2 = np.meshgrid(x1, x2)

@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-class MED():
+class MED:
 
     def __init__(self):
         """
@@ -10,21 +10,19 @@ class MED():
         """
         self.centroids = None
 
-
     def fit(self, X_train, y_train):
         """
         Fit the MED classifier to the training data.
-        
+
         :param X_train: array-like, shape (n_samples, n_features), training data
         :param y_train: array-like, shape (n_samples,), target values
         """
         self.centroids = self._compute_centroids(X_train, y_train)
 
-
     def _compute_centroids(self, X, y):
         """
         Compute the centroids for each class.
-        
+
         :param X: array-like, shape (n_samples, n_features), input data
         :param y: array-like, shape (n_samples,), target values
         :return: dict, class labels as keys and centroids as values
@@ -34,11 +32,10 @@ class MED():
             centroids[label] = X[y == label].mean(axis=0).reshape(-1, 1)
         return centroids
 
-
     def predict(self, X_test):
         """
         Predict the class labels for the test data.
-        
+
         :param X_test: array-like, shape (n_samples, n_features), test data
         :return: array, shape (n_samples,), predicted class labels
         """
@@ -47,7 +44,6 @@ class MED():
             distances = {label: np.linalg.norm(x.reshape(-1, 1) - centroid) for label, centroid in self.centroids.items()}
             predictions.append(min(distances, key=distances.get))
         return np.array(predictions)
-
 
     def get_decision_boundary_parameters(self):
         """
@@ -65,7 +61,6 @@ class MED():
 
         return m, c
 
-    
     def plot_decision_boundary_for2D(self, X_train, y_train):
         """
         Plots decision boundary for two dimensional features
@@ -77,13 +72,18 @@ class MED():
         # Decision boundary parameters
         m, c = self.get_decision_boundary_parameters()
 
-        # Plot
+        # Creating mesh for plot
         x1 = np.linspace(np.min(X_train[:, 0]), np.max(X_train[:, 0]), 100)
         x2 = np.linspace(np.min(X_train[:, 1]), np.max(X_train[:, 1]), 100)
         X1, X2 = np.meshgrid(x1, x2)
 
         g = lambda x: (m @ x + c).item()  # Decision boundary
-        Z = np.array([[g(np.array([x1, x2]).reshape(-1, 1)) for x1, x2 in zip(row_x1, row_x2)] for row_x1, row_x2 in zip(X1, X2)])
+        Z = np.array(
+            [
+                [g(np.array([x1, x2]).reshape(-1, 1)) for x1, x2 in zip(row_x1, row_x2)]
+                for row_x1, row_x2 in zip(X1, X2)
+            ]
+        )
 
         # Extracting the data related to each class
         label = np.sort(np.unique(y_train))
