@@ -16,8 +16,9 @@ class ML:
         """
         Fit the ML classifier to the training data.
 
-        :param X_train: array-like, shape (n_samples, n_features), training data
-        :param y_train: array-like, shape (n_samples,), target values
+        Args:
+            X_train (array-like): Training data, shape (n_samples, n_features).
+            y_train (array-like): Target values, shape (n_samples,).
         """
         self.means = self._compute_means(X_train, y_train)
         self.covariances = self._compute_covariances(X_train, y_train)
@@ -26,8 +27,11 @@ class ML:
         """
         Predict the class labels for the test data.
 
-        :param X_test: array-like, shape (n_samples, n_features), test data
-        :return: array, shape (n_samples,), predicted class labels
+        Args:
+            X_test (array-like): Test data, shape (n_samples, n_features).
+
+        Returns:
+            array: Predicted class labels, shape (n_samples,).
         """
         predictions = []
         for x in X_test:
@@ -54,9 +58,12 @@ class ML:
         """
         Compute the means for each class.
 
-        :param X: array-like, shape (n_samples, n_features), input data
-        :param y: array-like, shape (n_samples,), target values
-        :return: dict, class labels as keys and means as values
+        Args:
+            X (array-like): Input data, shape (n_samples, n_features).
+            y (array-like): Target values, shape (n_samples,).
+
+        Returns:
+            dict: Class labels as keys and means as values.
         """
         means = {}
         for label in np.unique(y):
@@ -65,11 +72,14 @@ class ML:
 
     def _compute_covariances(self, X, y):
         """
-        Compute the covariance matrices for each class.
+        Compute the covariances for each class.
 
-        :param X: array-like, shape (n_samples, n_features), input data
-        :param y: array-like, shape (n_samples,), target values
-        :return: dict, class labels as keys and covariance matrices as values
+        Args:
+            X (array-like): Input data, shape (n_samples, n_features).
+            y (array-like): Target values, shape (n_samples,).
+
+        Returns:
+            dict: Class labels as keys and covariances as values.
         """
         covariances = {}
         for label in np.unique(y):

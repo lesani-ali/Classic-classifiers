@@ -7,8 +7,9 @@ class MAP(ML):
         """
         Initialize MAP (Maximum A Posteriori) classifier with prior probabilities.
 
-        :param pc1: float, prior probability of class 1
-        :param pc2: float, prior probability of class 2
+        Args:
+            pc1 (float): Prior probability of class 1.
+            pc2 (float): Prior probability of class 2.
         """
         super().__init__()
         self.ksi = pc2 / pc1

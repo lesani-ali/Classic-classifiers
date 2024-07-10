@@ -14,8 +14,9 @@ class MED:
         """
         Fit the MED classifier to the training data.
 
-        :param X_train: array-like, shape (n_samples, n_features), training data
-        :param y_train: array-like, shape (n_samples,), target values
+        Args:
+            X_train (array-like): Training data, shape (n_samples, n_features).
+            y_train (array-like): Target values, shape (n_samples,).
         """
         self.centroids = self._compute_centroids(X_train, y_train)
 
@@ -23,9 +24,12 @@ class MED:
         """
         Compute the centroids for each class.
 
-        :param X: array-like, shape (n_samples, n_features), input data
-        :param y: array-like, shape (n_samples,), target values
-        :return: dict, class labels as keys and centroids as values
+        Args:
+            X (array-like): Input data, shape (n_samples, n_features).
+            y (array-like): Target values, shape (n_samples,).
+
+        Returns:
+            dict: Class labels as keys and centroids as values.
         """
         centroids = {}
         for label in np.unique(y):
@@ -33,11 +37,13 @@ class MED:
         return centroids
 
     def predict(self, X_test):
-        """
-        Predict the class labels for the test data.
+        """Predict the class labels for the test data.
 
-        :param X_test: array-like, shape (n_samples, n_features), test data
-        :return: array, shape (n_samples,), predicted class labels
+        Args:
+            X_test (array-like): Test data, shape (n_samples, n_features).
+
+        Returns:
+            array: Predicted class labels, shape (n_samples,).
         """
         predictions = []
         for x in X_test:
@@ -46,10 +52,10 @@ class MED:
         return np.array(predictions)
 
     def get_decision_boundary_parameters(self):
-        """
-        Calculates the parameters of decision boundary.
+        """Calculate the parameters of the decision boundary.
 
-        :return: Decision boundary parameters
+        Returns:
+            tuple: Decision boundary parameters.
         """
 
         z1 = list(self.centroids.values())[0]  # Mean for class 1
@@ -65,8 +71,9 @@ class MED:
         """
         Plots decision boundary for two dimensional features
 
-        :param X: array-like, shape (n_samples, n_features), input data
-        :param y: array-like, shape (n_samples,), target values
+        Args:
+            X_train (array-like): Training data, shape (n_samples, n_features).
+            y_train (array-like): Target values, shape (n_samples,).
         """
 
         # Decision boundary parameters

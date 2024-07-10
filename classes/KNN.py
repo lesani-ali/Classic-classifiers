@@ -8,8 +8,9 @@ class KNN:
         """
         Initialize k-Nearest Neighbors (KNN) with specified parameters.
 
-        :param k: int, number of neighbors to use
-        :param _type: str, either 'classification' or 'regression'
+        Args:
+            k (int): Number of neighbors to use.
+            _type (str): Either 'classification' or 'regression'.
         """
         self.k = k
         self._type = _type  # 'classification' or 'regression'
@@ -18,28 +19,35 @@ class KNN:
         """
         Fit the KNN model to the training data.
 
-        :param X_train: numpy array, training data
-        :param y_train: numpy array, training labels
+        Args:
+            X_train (array-like): Training data, shape (n_samples, n_features).
+            y_train (array-like): Target values, shape (n_samples,).
         """
         self.X_train = X_train
         self.y_train = y_train
 
-    def predict(self, samples):
+    def predict(self, X_test):
         """
         Predict the class labels for the input samples.
 
-        :param samples: numpy array, input samples
-        :return: numpy array, predicted labels
+        Args:
+            X_test (array-like): Test data, shape (n_samples, n_features).
+
+        Returns:
+            numpy array: Predicted labels.
         """
-        y_predicted = np.array([self._predict(sample.reshape(-1, 1)) for sample in samples])
+        y_predicted = np.array([self._predict(sample.reshape(-1, 1)) for sample in X_test])
         return y_predicted
 
     def _predict(self, x):
         """
         Predict the class label for a single sample.
 
-        :param x: numpy array, input sample
-        :return: predicted label
+        Args:
+            x (array-like): Input sample, shape (1, n_features).
+
+        Returns:
+            predicted label
         """
         distances = [np.linalg.norm(x - sample.reshape(-1, 1)) for sample in self.X_train]
         k_indices = np.argsort(distances)[: self.k]
