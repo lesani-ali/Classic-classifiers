@@ -51,3 +51,6 @@ Please follow these steps to set up the working environment:
 
 3. Activate the environment: <br>
 `conda activate ML`
+
+## Acknowledgements
+- The MNIST dataset is provided by Yann LeCun and can be found [here](http://yann.lecun.com/exdb/mnist/).
